@@ -15,5 +15,7 @@ Landing page institucional da Izur — Engenharia e Desenvolvimento de Software 
 ## Infraestrutura & Servidor
 - **Host**: Oracle Cloud Infrastructure (OCI) Compute x86 Micro.
 - **IP Público**: `137.131.237.135`
+- **Acesso Seguro (ZeroTier VPN)**: `192.168.194.100` (interface `ztfp6miizq`)
+- **Domínio de Produção**: `https://izur.com.br` com SSL/TLS ativo (Let's Encrypt / Certbot).
 - **Servidor Web**: Nginx 1.24+ com compressão Gzip, cache de ativos e cabeçalhos de segurança (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy).
 - **Deploy**: Script automatizado via SSH/SCP em `tools_antigravity/deploy/deploy.ps1`.

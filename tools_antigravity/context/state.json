@@ -5,6 +5,8 @@
   "theme": "black_and_gold",
   "server": {
     "host": "137.131.237.135",
+    "zerotier_ip": "192.168.194.100",
+    "domain": "izur.com.br",
     "user": "ubuntu",
     "webroot": "/var/www/izur-site",
     "webserver": "nginx",

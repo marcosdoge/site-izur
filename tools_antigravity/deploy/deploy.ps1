@@ -1,13 +1,13 @@
-# Script de deploy automatizado para Oracle Cloud VM (137.131.237.135)
+# Script de deploy automatizado para Oracle Cloud VM via ZeroTier (192.168.194.100)
 $ErrorActionPreference = "Stop"
 
 $SSH_KEY = "C:\Users\marco\.oci\oci_api_key.pem"
 $SSH_USER = "ubuntu"
-$SERVER_IP = "137.131.237.135"
+$SERVER_IP = "192.168.194.100"
 $REMOTE_DIR = "/var/www/izur-site"
 $LOCAL_DIR = "y:\Site Izur"
 
-Write-Host ">>> Iniciando Deploy para Izur na Oracle Cloud ($SERVER_IP)..." -ForegroundColor Cyan
+Write-Host ">>> Iniciando Deploy para Izur via ZeroTier ($SERVER_IP)..." -ForegroundColor Cyan
 
 # 1. Preparar diretórios remotos e backup
 Write-Host ">>> Preparando diretórios remotos e backup..."
