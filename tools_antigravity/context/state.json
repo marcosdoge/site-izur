@@ -1,13 +1,14 @@
 {
   "project": "Izur Landing Page",
   "version": "1.0.0",
-  "status": "in_progress",
+  "status": "completed",
   "theme": "black_and_gold",
   "server": {
     "host": "137.131.237.135",
     "user": "ubuntu",
     "webroot": "/var/www/izur-site",
-    "webserver": "nginx"
+    "webserver": "nginx",
+    "status": "active"
   },
   "architecture": {
     "type": "vanilla_web_components",
@@ -18,5 +19,6 @@
       "script.js"
     ]
   },
-  "updated_at": "2026-10-19T14:56:00Z"
+  "repository": "https://github.com/marcosdoge/site-izur",
+  "updated_at": "2026-10-19T15:02:00Z"
 }
