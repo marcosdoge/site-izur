@@ -1,0 +1,22 @@
+{
+  "project": "Izur Landing Page",
+  "version": "1.0.0",
+  "status": "in_progress",
+  "theme": "black_and_gold",
+  "server": {
+    "host": "137.131.237.135",
+    "user": "ubuntu",
+    "webroot": "/var/www/izur-site",
+    "webserver": "nginx"
+  },
+  "architecture": {
+    "type": "vanilla_web_components",
+    "shadow_dom": true,
+    "core_files": [
+      "index.html",
+      "style.css",
+      "script.js"
+    ]
+  },
+  "updated_at": "2026-10-19T14:56:00Z"
+}

@@ -1,0 +1,15 @@
+# Environment and secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Antigravity transient workspace
+tools_antigravity/*
+!tools_antigravity/context/
+!tools_antigravity/deploy/
+
+# OS artifacts
+Thumbs.db
+Desktop.ini
+.DS_Store
