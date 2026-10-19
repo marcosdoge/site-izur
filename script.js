@@ -195,11 +195,25 @@ class IzurHero extends HTMLElement {
           overflow: hidden;
           padding: 6rem 1.5rem 5rem;
           background: 
-            radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.12) 0%, rgba(7, 7, 9, 0) 70%),
-            linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px) 0 0 / 40px 40px,
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px) 0 0 / 40px 40px;
+            linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px) 0 0 / 40px 40px;
+        }
+        .particles-bg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+          overflow: hidden;
+          pointer-events: none;
+        }
+        #particles-canvas {
+          display: block;
+          width: 100%;
+          height: 100%;
         }
         .container {
+          position: relative;
+          z-index: 1;
           max-width: 1040px;
           margin: 0 auto;
           display: flex;
@@ -346,6 +360,9 @@ class IzurHero extends HTMLElement {
           }
         }
       </style>
+      <div id="particles-js" class="particles-bg">
+        <canvas id="particles-canvas"></canvas>
+      </div>
       <div class="container">
         <div class="badge">
           <span class="pulse-dot"></span>
@@ -393,6 +410,126 @@ class IzurHero extends HTMLElement {
     this.shadowRoot.getElementById('btn-hero-solutions').addEventListener('click', () => {
       scrollToSection('#solucoes');
     });
+
+    // Inicialização do particles.js nativo com partículas douradas
+    const canvas = this.shadowRoot.getElementById('particles-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = this.offsetWidth || window.innerWidth);
+      let height = (canvas.height = this.offsetHeight || 600);
+
+      const resizeHandler = () => {
+        width = canvas.width = this.offsetWidth || window.innerWidth;
+        height = canvas.height = this.offsetHeight || 600;
+      };
+      window.addEventListener('resize', resizeHandler);
+
+      const particleCount = Math.floor(Math.min(width / 13, 80));
+      const particles = [];
+      const goldPalette = ['#D4AF37', '#F5D77F', '#FFF3C4', '#AA771C'];
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: (Math.random() - 0.5) * 1.2,
+          radius: Math.random() * 2 + 1.2,
+          color: goldPalette[Math.floor(Math.random() * goldPalette.length)],
+          alpha: Math.random() * 0.5 + 0.35
+        });
+      }
+
+      let mouse = { x: null, y: null, radius: 150 };
+
+      this.addEventListener('mousemove', (e) => {
+        const rect = this.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      this.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      this.addEventListener('click', (e) => {
+        const rect = this.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        for (let i = 0; i < 4; i++) {
+          particles.push({
+            x: clickX,
+            y: clickY,
+            vx: (Math.random() - 0.5) * 3,
+            vy: (Math.random() - 0.5) * 3,
+            radius: Math.random() * 2.2 + 1.5,
+            color: '#F5D77F',
+            alpha: 0.85
+          });
+        }
+        if (particles.length > 110) particles.splice(0, 4);
+      });
+
+      const animate = () => {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+
+          // Repulsão do mouse
+          if (mouse.x !== null && mouse.y !== null) {
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < mouse.radius) {
+              const force = (mouse.radius - dist) / mouse.radius;
+              const angle = Math.atan2(dy, dx);
+              p.x += Math.cos(angle) * force * 3.5;
+              p.y += Math.sin(angle) * force * 3.5;
+            }
+          }
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          // Desenho da partícula
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+
+          // Conexões douradas
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 140) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              const lineAlpha = (1 - dist / 140) * 0.3;
+              ctx.strokeStyle = `rgba(212, 175, 55, ${lineAlpha})`;
+              ctx.lineWidth = 0.85;
+              ctx.stroke();
+            }
+          }
+        }
+
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(animate);
+      };
+
+      animate();
+    }
   }
 }
 customElements.define('izur-hero', IzurHero);
