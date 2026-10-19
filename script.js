@@ -1170,30 +1170,14 @@ class IzurFooter extends HTMLElement {
           color: var(--text-muted, #64748B);
           font-size: 0.8125rem;
         }
-        .server-status {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: var(--text-secondary, #94A3B8);
-          font-size: 0.8125rem;
-        }
-        .status-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: #10B981;
-          box-shadow: 0 0 8px #10B981;
-        }
       </style>
       <div class="container">
         <div class="brand-col">
           <img src="assets/images/logo-icon-dourado.png" alt="Izur">
           <span class="brand-title">IZUR</span>
-          <span class="copy">&copy; 2026. Todos os direitos reservados.</span>
         </div>
-        <div class="server-status">
-          <span class="status-dot"></span>
-          <span>Oracle Cloud VM (137.131.237.135) • Status: Operacional</span>
+        <div class="copy">
+          &copy; 2026 Izur. Todos os direitos reservados.
         </div>
       </div>
     `;
