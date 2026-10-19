@@ -424,23 +424,23 @@ class IzurHero extends HTMLElement {
       };
       window.addEventListener('resize', resizeHandler);
 
-      const particleCount = Math.floor(Math.min(width / 13, 80));
+      const particleCount = Math.floor(Math.min(width / 11, 105));
       const particles = [];
-      const goldPalette = ['#D4AF37', '#F5D77F', '#FFF3C4', '#AA771C'];
+      const goldPalette = ['#F5D77F', '#D4AF37', '#FFDF73'];
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 1.2,
-          vy: (Math.random() - 0.5) * 1.2,
-          radius: Math.random() * 2 + 1.2,
+          vx: (Math.random() - 0.5) * 1.1,
+          vy: (Math.random() - 0.5) * 1.1,
+          radius: Math.random() * 1.3 + 0.9,
           color: goldPalette[Math.floor(Math.random() * goldPalette.length)],
-          alpha: Math.random() * 0.5 + 0.35
+          alpha: Math.random() * 0.4 + 0.5
         });
       }
 
-      let mouse = { x: null, y: null, radius: 150 };
+      let mouse = { x: null, y: null, radius: 180 };
 
       this.addEventListener('mousemove', (e) => {
         const rect = this.getBoundingClientRect();
@@ -457,18 +457,18 @@ class IzurHero extends HTMLElement {
         const rect = this.getBoundingClientRect();
         const clickX = e.clientX - rect.left;
         const clickY = e.clientY - rect.top;
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
           particles.push({
             x: clickX,
             y: clickY,
-            vx: (Math.random() - 0.5) * 3,
-            vy: (Math.random() - 0.5) * 3,
-            radius: Math.random() * 2.2 + 1.5,
-            color: '#F5D77F',
-            alpha: 0.85
+            vx: (Math.random() - 0.5) * 3.5,
+            vy: (Math.random() - 0.5) * 3.5,
+            radius: Math.random() * 1.5 + 1.0,
+            color: '#FFDF73',
+            alpha: 0.9
           });
         }
-        if (particles.length > 110) particles.splice(0, 4);
+        if (particles.length > 130) particles.splice(0, 5);
       });
 
       const animate = () => {
@@ -477,7 +477,7 @@ class IzurHero extends HTMLElement {
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
 
-          // Repulsão do mouse
+          // Repulsão suave do cursor
           if (mouse.x !== null && mouse.y !== null) {
             const dx = p.x - mouse.x;
             const dy = p.y - mouse.y;
@@ -485,8 +485,17 @@ class IzurHero extends HTMLElement {
             if (dist < mouse.radius) {
               const force = (mouse.radius - dist) / mouse.radius;
               const angle = Math.atan2(dy, dx);
-              p.x += Math.cos(angle) * force * 3.5;
-              p.y += Math.sin(angle) * force * 3.5;
+              p.x += Math.cos(angle) * force * 3;
+              p.y += Math.sin(angle) * force * 3;
+
+              // Linha conectando a partícula diretamente ao cursor do mouse
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(mouse.x, mouse.y);
+              const mouseLineAlpha = (1 - dist / mouse.radius) * 0.75;
+              ctx.strokeStyle = `rgba(255, 223, 115, ${mouseLineAlpha})`;
+              ctx.lineWidth = 1.35;
+              ctx.stroke();
             }
           }
 
@@ -498,27 +507,28 @@ class IzurHero extends HTMLElement {
           if (p.y < 0) p.y = height;
           if (p.y > height) p.y = 0;
 
-          // Desenho da partícula
+          // Desenho dos pontos (delicados para destacar as linhas)
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
           ctx.fillStyle = p.color;
           ctx.globalAlpha = p.alpha;
           ctx.fill();
 
-          // Conexões douradas
+          // Conexões douradas brilhantes e bem visíveis entre partículas
           for (let j = i + 1; j < particles.length; j++) {
             const p2 = particles[j];
             const dx = p.x - p2.x;
             const dy = p.y - p2.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
-            if (dist < 140) {
+            if (dist < 185) {
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
-              const lineAlpha = (1 - dist / 140) * 0.3;
-              ctx.strokeStyle = `rgba(212, 175, 55, ${lineAlpha})`;
-              ctx.lineWidth = 0.85;
+              // Opacidade alta (até 0.75) para linhas bem nítidas
+              const lineAlpha = (1 - dist / 185) * 0.75;
+              ctx.strokeStyle = `rgba(245, 215, 127, ${lineAlpha})`;
+              ctx.lineWidth = 1.35;
               ctx.stroke();
             }
           }
