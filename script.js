@@ -43,20 +43,20 @@ class IzurNavbar extends HTMLElement {
         .brand {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.85rem;
           text-decoration: none;
           cursor: pointer;
         }
         .brand img {
-          height: 38px;
+          height: 32px;
           width: auto;
-          filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.35));
+          filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.45));
         }
         .brand-text {
-          font-family: var(--font-heading, 'Bahnschrift', sans-serif);
-          font-size: 1.35rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
+          font-family: var(--font-heading, 'Bahnschrift Light', 'Urbanist', sans-serif);
+          font-size: 1.5rem;
+          font-weight: 500;
+          letter-spacing: 0.22em;
           background: var(--gold-gradient, linear-gradient(135deg, #FFF3C4, #D4AF37, #996515));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -133,7 +133,7 @@ class IzurNavbar extends HTMLElement {
       </style>
       <div class="container">
         <a class="brand" id="brand-link">
-          <img src="assets/images/logo-dourada.png" alt="Izur Logo">
+          <img src="assets/images/logo-icon-dourado.png" alt="Izur Logo">
           <span class="brand-text">IZUR</span>
         </a>
         <ul class="nav-links">
@@ -235,11 +235,11 @@ class IzurHero extends HTMLElement {
           50% { opacity: 0.4; transform: scale(0.85); }
         }
         .headline {
-          font-family: var(--font-heading, 'Bahnschrift', sans-serif);
+          font-family: var(--font-heading, 'Bahnschrift Light', 'Urbanist', sans-serif);
           font-size: clamp(2.25rem, 5vw, 3.85rem);
-          font-weight: 800;
+          font-weight: 600;
           line-height: 1.15;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.01em;
           color: #FFFFFF;
           margin-bottom: 1.5rem;
           max-width: 920px;
@@ -432,7 +432,8 @@ class IzurSolutions extends HTMLElement {
         .title {
           font-family: var(--font-heading, sans-serif);
           font-size: clamp(2rem, 3.5vw, 2.75rem);
-          font-weight: 800;
+          font-weight: 600;
+          letter-spacing: -0.01em;
           color: #FFFFFF;
           margin-bottom: 1rem;
         }
@@ -478,7 +479,7 @@ class IzurSolutions extends HTMLElement {
         .card-title {
           font-family: var(--font-heading, sans-serif);
           font-size: 1.25rem;
-          font-weight: 700;
+          font-weight: 600;
           color: #FFFFFF;
           margin-bottom: 0.75rem;
         }
@@ -652,7 +653,8 @@ class IzurStack extends HTMLElement {
         .title {
           font-family: var(--font-heading, sans-serif);
           font-size: clamp(2rem, 3.5vw, 2.5rem);
-          font-weight: 800;
+          font-weight: 600;
+          letter-spacing: -0.01em;
           color: #FFFFFF;
           margin-bottom: 2.5rem;
         }
@@ -837,7 +839,8 @@ class IzurMethodology extends HTMLElement {
         .title {
           font-family: var(--font-heading, sans-serif);
           font-size: clamp(2rem, 3.5vw, 2.75rem);
-          font-weight: 800;
+          font-weight: 600;
+          letter-spacing: -0.01em;
           color: #FFFFFF;
           margin-bottom: 1rem;
         }
@@ -865,7 +868,7 @@ class IzurMethodology extends HTMLElement {
         .pillar-title {
           font-family: var(--font-heading, sans-serif);
           font-size: 1.25rem;
-          font-weight: 700;
+          font-weight: 600;
           color: #FFFFFF;
           margin-bottom: 0.75rem;
         }
@@ -948,7 +951,8 @@ class IzurContact extends HTMLElement {
         .title {
           font-family: var(--font-heading, sans-serif);
           font-size: clamp(2rem, 3.5vw, 2.75rem);
-          font-weight: 800;
+          font-weight: 600;
+          letter-spacing: -0.01em;
           color: #FFFFFF;
           margin-bottom: 1rem;
         }
@@ -1148,11 +1152,19 @@ class IzurFooter extends HTMLElement {
         .brand-col {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.85rem;
         }
         .brand-col img {
-          height: 28px;
+          height: 24px;
           width: auto;
+          filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+        }
+        .brand-title {
+          font-family: var(--font-heading, sans-serif);
+          font-size: 1.15rem;
+          font-weight: 500;
+          letter-spacing: 0.2em;
+          color: var(--gold-light, #F5D77F);
         }
         .copy {
           color: var(--text-muted, #64748B);
@@ -1175,8 +1187,9 @@ class IzurFooter extends HTMLElement {
       </style>
       <div class="container">
         <div class="brand-col">
-          <img src="assets/images/logo-dourada.png" alt="Izur">
-          <span class="copy">IZUR &copy; 2026. Todos os direitos reservados.</span>
+          <img src="assets/images/logo-icon-dourado.png" alt="Izur">
+          <span class="brand-title">IZUR</span>
+          <span class="copy">&copy; 2026. Todos os direitos reservados.</span>
         </div>
         <div class="server-status">
           <span class="status-dot"></span>
